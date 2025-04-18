@@ -1,64 +1,67 @@
-import { Image, StyleSheet, Platform } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
+import { Image, StyleSheet, Platform, SafeAreaView, View, Text, Pressable } from 'react-native';
+import computer from "../../assets/images/computer.png"
+import CollectionList from '@/components/CollectionList';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { useContext, useState } from 'react';
+import AddCollectionModal from '@/components/Modal/AddCollectionModal';
+import AskToAddShortcut from '@/components/Modal/AskToAddShortcut';
 export default function HomeScreen() {
+
+  const [openAddModal, setOpenAddModal] = useState(false)
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.introduction}>
+        <Image style={styles.computerIcon} source={computer}></Image>
+        <View style={styles.leftIntroduction}>
+          <Text style={styles.subTitle}>HỌC CÙNG</Text>
+          <Text style={styles.subTitle}>FLASH CARD BG</Text>
+        </View>
+      </View>
+      <View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 8, paddingBottom: 8 }}>
+          <Text style={{ fontSize: 18, fontWeight: 500 }}>Danh sách học phần</Text>
+          <Pressable onPress={() => setOpenAddModal(true)} style={{ borderRadius: "50%", backgroundColor: "#1dd14a", padding: 3 }}>
+            <AntDesign name="plus" size={24} color="white" />
+          </Pressable>
+        </View>
+        <CollectionList />
+      </View>
+      <AddCollectionModal modalVisible={openAddModal} setModalVisible={setOpenAddModal} />
+      <AskToAddShortcut />
+    </SafeAreaView >
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    backgroundColor: "#fff",
+    flex: 1,
+    paddingBottom: 210
+  },
+  introduction: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    flexDirection: "row",
     alignItems: 'center',
-    gap: 8,
+    justifyContent: "center",
+    gap: 64,
+    paddingTop: 64,
+  },
+  leftIntroduction: {
+    flexDirection: "column",
+    gap: 2,
+    alignContent: "center",
+    justifyContent: "center"
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 600
+  },
+  subTitle: {
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: 500
   },
   stepContainer: {
     gap: 8,
@@ -71,4 +74,8 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
+  computerIcon: {
+    height: 96,
+    width: 96
+  }
 });

@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "study-with-bg",
+    "name": "Study With Bg",
     "slug": "study-with-bg",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/appLogo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -12,22 +12,30 @@
       "supportsTablet": true
     },
     "android": {
+      "android": "com.app.studywithbg",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/appLogo.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.manhdevlord.studywithbg"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/appLogo.png",
+      "name": "Study With BG",
+      "shortName": "StudyBG",
+      "themeColor": "#ffffff",
+      "backgroundColor": "#ffffff",
+      "orientation": "portrait",
+      "display": "standalone"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/appLogo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -36,6 +44,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9f89383c-8960-4d6c-b2af-f3634ef0c695"
+      }
     }
   }
 }
