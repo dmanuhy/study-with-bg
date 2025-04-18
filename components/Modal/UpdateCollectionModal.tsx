@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
     inputText: {
         borderWidth: 1,
         borderRadius: 10,
+        padding: 8
     },
     flashCard: {
         flexDirection: "column",
